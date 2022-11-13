@@ -1,4 +1,4 @@
-class Task {
+export class Task {
   #id;
   #name;
   #counter;
@@ -20,7 +20,7 @@ class Task {
     return this.#counter;
   }
 
-  addTask() {
+  increaseCounter() {
     this.#counter += 1;
     return this;
   }
@@ -30,9 +30,3 @@ class Task {
   }
 }
 
-const task = new Task('wash the dishes', 5);
-console.log('task  after creation: ', task);
-console.log('task after adding a task: ', task.addTask());
-task.id = 5; // никак не влияет
-task.setName('nothing');
-console.log('task in the end: ', task);

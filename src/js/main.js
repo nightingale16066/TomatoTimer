@@ -1,4 +1,5 @@
-import './modules/task';
+import {Task} from './modules/task';
+import {Tomato} from './modules/tomato';
 
 let count = 0;
 const imp = ['default', 'important', 'so-so'];
@@ -17,4 +18,18 @@ document.querySelector('.button-importance').addEventListener('click', ({target}
     }
   }
 });
+
+const tomatoTimer = new Tomato();
+console.log('initial tomatoTimer: ', tomatoTimer);
+
+const task1 = new Task('learn RegExp');
+const task2 = new Task('feed the cat');
+
+tomatoTimer.addTask(task1);
+tomatoTimer.addTask(task2);
+console.log('add task to tomatoTimer: ', tomatoTimer);
+
+tomatoTimer.activateTask(task1.id);
+console.log('after activating tomatoTimer: ', tomatoTimer);
+tomatoTimer.runTask();
 
