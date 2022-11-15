@@ -30,3 +30,28 @@ export class Task {
   }
 }
 
+export class ImportantTask extends Task {
+  importance = 'important';
+
+  constructor(name, counter = 0) {
+    super(name, counter);
+  }
+}
+
+export class CommonTask extends Task {
+  importance = 'so-so';
+
+  constructor(name, counter = 0) {
+    super(name, counter);
+  }
+}
+
+export class UnimportantTask extends Task {
+  importance = 'default';
+
+  constructor(name, counter = 0) {
+    super(name, counter);
+  }
+}
+
+

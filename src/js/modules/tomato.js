@@ -1,3 +1,5 @@
+import {ImportantTask, CommonTask, UnimportantTask} from './task';
+
 export class Tomato {
   #taskTime;
   #pauseTime;
@@ -5,12 +7,40 @@ export class Tomato {
   #taskList;
   #activeTask = null;
 
+  get taskTime() {
+    return this.#taskTime;
+  }
+  get pauseTime() {
+    return this.#pauseTime;
+  }
+  get bigPause() {
+    return this.#bigPause;
+  }
+  get taskList() {
+    return this.#taskList;
+  }
+  get activeTask() {
+    return this.#activeTask;
+  }
+
   // eslint-disable-next-line max-len
   constructor({taskTime = 25, pauseTime = 5, bigPause = 15, taskList = []} = {}) {
+    if (Tomato._instance) {
+      return Tomato._instance;
+    }
     this.#taskTime = taskTime;
     this.#pauseTime = pauseTime;
     this.#bigPause = bigPause;
     this.#taskList = taskList;
+    Tomato._instance = this;
+  }
+
+  createTask(importance, taskName) {
+    // eslint-disable-next-line max-len
+    const Task = importance === 'important' ? ImportantTask : importance === 'so-so' ? CommonTask : UnimportantTask;
+    const task = new Task(taskName);
+    this.addTask(task);
+    return task;
   }
 
   addTask(task) {
@@ -18,8 +48,20 @@ export class Tomato {
   }
 
   activateTask(id) {
+    if (this.#activeTask) return;
     const curTask = this.#taskList.find(task => task.id === id);
     this.#activeTask = curTask;
+    console.log('this.#activeTask: ', this.#activeTask);
+  }
+
+  deleteFromActive() {
+    this.#activeTask = null;
+  }
+
+  deleteTask(id) {
+    console.log(id === this.#activeTask?.id);
+    if (id === this.#activeTask?.id) this.#activeTask = null;
+    this.#taskList = this.#taskList.filter(item => item.id !== id);
   }
 
   setTimeForTask() {

@@ -7,6 +7,11 @@
 	bottom: 0;
 	background-color: rgba(0, 0, 0, .60);
 	z-index: 3;
+  color: black;
+}
+
+.modal-active {
+  display: block;
 }
 
 .modal-delete {
@@ -18,7 +23,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   height: 175px;
-  width: 350px;
+  width: 400px;
   padding: 25px 83px;
   background: $light-font;
 }
@@ -27,7 +32,8 @@
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
-  line-height: 17px;
+  line-height: 30px;
+  margin-bottom: 20px;
 }
 
 .modal-delete__close-button {
