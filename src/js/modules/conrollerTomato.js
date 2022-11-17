@@ -24,7 +24,7 @@ export class ConrollerTomato {
     buttons.addEventListener('click', e => {
       if (e.target.closest('.button-primary') && this.tomatoTimer.activeTask && !this.isRunning) {
         this.isRunning = true;
-        this.restTime ? this.setTimer(this.restTime) : this.setTimer(this.tomatoTimer.taskTime);
+        this.restTime ? this.setTimer(this.restTime * 60) : this.setTimer(this.tomatoTimer.taskTime * 60);
       }
       if (e.target.closest('.button-secondary') && this.isRunning) {
         clearInterval(this.#timerId);
@@ -64,11 +64,11 @@ export class ConrollerTomato {
         this.render.increaseCounter(this.tomatoTimer.activeTask.id, this.tomatoTimer.activeTask.counter);
 
         if (!(this.tomatoTimer.activeTask.counter % 3) && this.tomatoTimer.activeTask.counter !== 0) {
-          this.setTimer(this.tomatoTimer.bigPause);
+          this.setTimer(this.tomatoTimer.bigPause * 60);
           this.isPauseTime = true;
           return;
         } else {
-          this.setTimer(this.tomatoTimer.pauseTime);
+          this.setTimer(this.tomatoTimer.pauseTime * 60);
           this.isPauseTime = true;
           return;
         }
@@ -76,7 +76,7 @@ export class ConrollerTomato {
       if (this.restTime === 0 && this.isPauseTime) {
         clearInterval(this.#timerId);
         this.isPauseTime = false;
-        this.setTimer(this.tomatoTimer.taskTime);
+        this.setTimer(this.tomatoTimer.taskTime * 60);
         return;
       }
     }, 1000);
